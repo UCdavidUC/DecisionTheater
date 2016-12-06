@@ -27,6 +27,7 @@ public class Main {
 	
 	private static ArrayList<Object> audioList = new ArrayList<Object>();
 	
+	@SuppressWarnings("rawtypes")
 	private static HashMap map = new HashMap();
 	private static int globalKey = 0;
 	
@@ -37,6 +38,8 @@ public class Main {
 	    File file = new File("src/main/java/com/classes/programa01.test");
 	    
 	    parse(file);
+	    
+	    display();
 	    
         // TODO before using media, we need to validate that the media exist, otherwise we need to
         // throw MediaNotFoundException, so we need to create this exception specifying which is the error.
@@ -116,7 +119,8 @@ public class Main {
     	return className;
     }
     
-    private static String genMediaPresentationToken(String[] line, String presentation) {    	
+    @SuppressWarnings("unchecked")
+	private static String genMediaPresentationToken(String[] line, String presentation) {    	
     	String mediaName = "";
     	String mediaType = "";
     	String mediaPath = "";
@@ -143,7 +147,7 @@ public class Main {
     		img.setName(mediaName);
     		img.setPath(mediaPath);
     		node.setMedia(img);
-    		map.put(globalKey, img);
+    		
     		break;
     	case "Video": 
     		VideoClass video = new VideoClass();
@@ -161,7 +165,10 @@ public class Main {
     		text.setPath(mediaPath);
     		node.setMedia(text);
     		break;
-    	}	
+    	}
+    	
+    	map.put(globalKey, node);
+		globalKey++;
     	    	
     	return 	"Media type: " + mediaType + "\n" +
     			"Media name: " + mediaName + "\n" +
@@ -183,6 +190,8 @@ public class Main {
     	audio.setPath(mediaPath);
     	audio.setDelay(delay);
     	audio.setDuration(duration);
+    	
+    	audioList.add(audio);
     	
     	return 	"Media type: " + mediaType + "\n" +
 		"Media name: " + mediaName + "\n" +
