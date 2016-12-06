@@ -27,7 +27,8 @@ public class Main {
 	
 	private static ArrayList<Object> audioList = new ArrayList<Object>();
 	
-	HashMap map = new HashMap();
+	private static HashMap map = new HashMap();
+	private static int globalKey = 0;
 	
 	public static Tree tree = new Tree("Main tree");
 	
@@ -79,11 +80,11 @@ public class Main {
     	    		System.out.println("Nombre del programa: " + programName);
     	    		break;
     	    	case "Secuencial":
-    	    		String seqToken = genSequentialToken(lineElements);
+    	    		String seqToken = genMediaPresentationToken(lineElements, "Secuencial");
     	    		System.out.println(seqToken);
     	    		break;
     	    	case "Paralelo":
-    	    		genParallelToken(lineElements);
+    	    		genMediaPresentationToken(lineElements, "Paralelo");
     	    		break;
     	    	case "Audio":
     	    		genAudioToken(lineElements);
@@ -115,7 +116,7 @@ public class Main {
     	return className;
     }
     
-    private static String genSequentialToken(String[] line) {    	
+    private static String genMediaPresentationToken(String[] line, String presentation) {    	
     	String mediaName = "";
     	String mediaType = "";
     	String mediaPath = "";
@@ -123,7 +124,7 @@ public class Main {
     	int duration = 0; //msec
     	
     	Node node = new Node();
-    	node.setPresentation("Sequence");
+    	node.setPresentation(presentation);
     	    	    	
     	if (line[0].replaceAll("[^a-zA-Z0-9]","").equals("Secuencial")) {
     		mediaName = line[2].replaceAll("[^a-zA-Z0-9]","");
@@ -142,6 +143,7 @@ public class Main {
     		img.setName(mediaName);
     		img.setPath(mediaPath);
     		node.setMedia(img);
+    		map.put(globalKey, img);
     		break;
     	case "Video": 
     		VideoClass video = new VideoClass();
@@ -157,7 +159,8 @@ public class Main {
     		text.setDuration(duration);
     		text.setName(mediaName);
     		text.setPath(mediaPath);
-    		
+    		node.setMedia(text);
+    		break;
     	}	
     	    	
     	return 	"Media type: " + mediaType + "\n" +
@@ -168,12 +171,24 @@ public class Main {
     	
     }
     
-    private static void genParallelToken(String[] line) {
+    private static String genAudioToken(String[] line) {
+    	String mediaName = "";
+    	String mediaType = "";
+    	String mediaPath = "";
+    	int delay = 0; //msec
+    	int duration = 0; //msec
     	
-    }
-    
-    private static void genAudioToken(String[] line) {
+    	AudioClass audio = new AudioClass();
+    	audio.setName(mediaName);
+    	audio.setPath(mediaPath);
+    	audio.setDelay(delay);
+    	audio.setDuration(duration);
     	
+    	return 	"Media type: " + mediaType + "\n" +
+		"Media name: " + mediaName + "\n" +
+		"Media path: " + mediaPath + "\n" +
+		"Delay: " + delay + "\n" +
+		"Duration: " + duration + "\n";
     }
 
     private static void endProgram() {
