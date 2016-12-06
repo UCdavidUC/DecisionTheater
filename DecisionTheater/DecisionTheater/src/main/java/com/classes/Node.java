@@ -9,10 +9,9 @@ public class Node {
 
     private Node left;
     private Node right;
-    private MediaAbstract leftMedia;
-    private MediaAbstract rightMedia;
-    private boolean leaf;
+    private MediaAbstract media;
     private boolean composition;
+    private String presentation;
     
     public Node getLeft() {
         return left;
@@ -30,20 +29,12 @@ public class Node {
         this.right = right;
     }
 
-    public MediaAbstract getLeftMedia() {
-        return leftMedia;
+    public MediaAbstract getMedia() {
+        return media;
     }
 
-    public void setLeftMedia(MediaAbstract leftMedia) {
-        this.leftMedia = leftMedia;
-    }
-
-    public MediaAbstract getRightMedia() {
-        return rightMedia;
-    }
-
-    public void setRightMedia(MediaAbstract rightMedia) {
-        this.rightMedia = rightMedia;
+    public void setMedia(MediaAbstract media) {
+        this.media = media;
     }
 
     public boolean isComposition() {
@@ -57,30 +48,22 @@ public class Node {
     public Node() {}
     
     public Node(Node right, Node left) {
-        leaf = false;
         this.right = right;
         this.left = left;
     }
     
-    public Node(MediaAbstract leftMedia, MediaAbstract rightMedia) {
-        this.leftMedia = leftMedia;
-        this.rightMedia = rightMedia;
+    public Node(Node left, Node right, MediaAbstract media) {
+        this.left = left;
+        this.right = right;
+        this.media = media;
     }
     
-    public void addNode(Node newNode) {
-        if (left == null) {
-            left = newNode;
-        } else {
-            if (right == null) {
-                right = newNode;
-            } else {
-                System.out.println("ERROR: Cannot add child node!");
-            }
-        }
+    public String getPresentation() {
+    	return presentation;
     }
     
-    public boolean isLeaf() {
-        return leaf;
+    public void setPresentation(String p) {
+    	this.presentation = p;
     }
     
     public void parallelRun() {

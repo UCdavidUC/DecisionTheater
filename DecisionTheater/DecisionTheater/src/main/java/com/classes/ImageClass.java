@@ -5,7 +5,6 @@ import java.io.File;
 public class ImageClass extends MediaAbstract {
 
     private String name;
-    private String presentation;
 	
 	private float duration;     // msec
     private float delay;        // msec
@@ -25,10 +24,6 @@ public class ImageClass extends MediaAbstract {
     
     public void setName(String n) {
     	this.name = n;
-    }
-    
-    public String getPresentation() {
-    	return presentation;
     }
     
     public float getDuration() {

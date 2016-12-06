@@ -4,7 +4,9 @@ import java.io.File;
 
 public class AudioClass extends MediaAbstract {
     
-    private float duration;     // msec
+	private String name;
+	
+	private float duration;     // msec
     private float delay;        // msec
     
     // Spatial
@@ -15,6 +17,14 @@ public class AudioClass extends MediaAbstract {
     // Media file and path
     private String path;        // Can be either a local path or remote path for web media.
     private File media;
+    
+    public String getName() {
+    	return name;
+    }
+    
+    public void setName(String name) {
+    	this.name = name;
+    }
     
     public float getDuration() {
         return duration;

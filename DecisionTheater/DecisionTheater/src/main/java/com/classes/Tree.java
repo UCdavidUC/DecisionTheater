@@ -9,6 +9,10 @@ public class Tree {
     private String name;
     private String description;
     
+    public Tree(String name) {
+    	this.name = name;
+    }
+    
     public String getName() {
         return name;
     }
@@ -21,23 +25,51 @@ public class Tree {
         return description;
     }
     
-    public void setDescriptiion(String d) {
+    public void setDescription(String d) {
         this.description = d;
     }
     
-    public void init() {
-        Node root = new Node();
+    public void init(Node node, String presentation) {
         if (nodes == null) {
         	nodes = new ArrayList<Node>();
         }
-        nodes.add(root);
+        nodes.add(node);
         System.out.println("Tree has been initialized!");
     }
     
-    public boolean buildTree () {
-        // TODO tree build will parse the input from the user.
-        
-        return true;
+    public boolean isBalanced(Node root) {
+    	if (root == null) {
+    		return true;
+    	} if (getHeight(root) == -1) {
+    		return false;
+    	}
+    	return true;
+    }
+    
+    public void addNode(Node node, Node parent) {
+    	if (nodes == null) {
+    		System.out.println("Tree has not ben initialized yet");
+    	} else {
+    		nodes.add(node);
+    	}
+    }
+    
+    public int getHeight(Node root) {
+    	if (root == null) {
+    		return 0;
+    	}
+    	
+    	int leftHeight = getHeight(root.getLeft());
+    	int rightHeight = getHeight(root.getRight());
+    	
+    	if (leftHeight == -1 || rightHeight == -1) {
+    		return -1;
+    	}
+    	if (Math.abs(leftHeight - rightHeight) > 1) {
+    		return -1;
+    	}
+    	return Math.max(leftHeight, rightHeight) + 1;
+    	
     }
     
     public void printTree() {

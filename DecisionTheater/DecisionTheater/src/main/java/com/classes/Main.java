@@ -26,48 +26,13 @@ public class Main {
 	public ArrayList<Object> screen07 = new ArrayList<Object>();
 	
 	private static ArrayList<Object> audioList = new ArrayList<Object>();
-	private static ArrayList<MediaAbstract> mediaList = new ArrayList<MediaAbstract>();
 	
 	HashMap map = new HashMap();
 	
+	public static Tree tree = new Tree("Main tree");
+	
     public static void main(String[] args) {
-        
-    	/*
-    	Tree tree = new Tree();
-        tree.init();
-        
-        Scene scene = new Scene(1920, 1080);
-        scene.display();
-        
-        
-                
-        AudioClass audio = new AudioClass();
-	        audio.setDelay(100);
-	        audio.setDuration(3000);
-	        audio.setPath("path");
-	        audio.setxCoord(0);
-	        audio.setyCoord(0);
-	        
-	    ImageClass image = new ImageClass();
-	    	image.setDelay(100);
-	    	image.setDuration(3000);
-	    	image.setPath("Path");
-	        image.setxCoord(0);
-	        image.setyCoord(0);
-	        
-	    TextClass text = new TextClass();
-	    	text.setDelay(100);
-	    	text.setDuration(3000);
-	    	text.setPath("Path");
-	    	text.setxCoord(0);
-	    	text.setyCoord(0);
-	   
-	    audio.printDetail("audio");
-	    image.printDetail("image");
-	    text.printDetail("text");
-	    
-	    */
-        
+    	
 	    File file = new File("src/main/java/com/classes/programa01.test");
 	    
 	    parse(file);
@@ -156,17 +121,16 @@ public class Main {
     	String mediaPath = "";
     	int delay = 0; //msec
     	int duration = 0; //msec
-    	    	
+    	
+    	Node node = new Node();
+    	node.setPresentation("Sequence");
+    	    	    	
     	if (line[0].replaceAll("[^a-zA-Z0-9]","").equals("Secuencial")) {
     		mediaName = line[2].replaceAll("[^a-zA-Z0-9]","");
     		mediaPath = line[3];
     		mediaType = line[4];
     		delay = Integer.parseInt(line[5]);
     		duration = Integer.parseInt(line[6]);
-    	} else {
-    		mediaName = "";
-    		mediaPath = "";
-    		mediaType = "";
     	}
     	
     	// Sequential object generation
@@ -177,12 +141,25 @@ public class Main {
     		img.setDuration(duration);
     		img.setName(mediaName);
     		img.setPath(mediaPath);
-    		mediaList.add(img);
+    		node.setMedia(img);
     		break;
     	case "Video": 
+    		VideoClass video = new VideoClass();
+    		video.setDelay(delay);
+    		video.setDuration(duration);
+    		video.setName(mediaName);
+    		video.setPath(mediaPath);
+    		node.setMedia(video);
+    		break;
+    	case "Texto":
+    		TextClass text = new TextClass();
+    		text.setDelay(delay);
+    		text.setDuration(duration);
+    		text.setName(mediaName);
+    		text.setPath(mediaPath);
     		
     	}	
-    	
+    	    	
     	return 	"Media type: " + mediaType + "\n" +
     			"Media name: " + mediaName + "\n" +
     			"Media path: " + mediaPath + "\n" +
