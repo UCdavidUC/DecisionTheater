@@ -147,7 +147,6 @@ public class Main {
     		img.setName(mediaName);
     		img.setPath(mediaPath);
     		node.setMedia(img);
-    		
     		break;
     	case "Video": 
     		VideoClass video = new VideoClass();
@@ -164,6 +163,8 @@ public class Main {
     		text.setName(mediaName);
     		text.setPath(mediaPath);
     		node.setMedia(text);
+
+    		
     		break;
     	}
     	
