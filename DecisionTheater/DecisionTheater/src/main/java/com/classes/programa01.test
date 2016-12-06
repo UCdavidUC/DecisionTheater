@@ -1,0 +1,8 @@
+Definicion Programa01:
+
+	Secuencial(Media imagen01: "src/main/resources/media/Marbble.jpg", Imagen, 100, 6000);
+	Paralelo(Media imagen02: "src/main/resources/media/Mountain.png", Imagen, 100, 6000);
+	Paralelo(Media imagen03: "src/main/resources/media/Marbble.jpg", Imagen, 100, 6000);
+	Audio(Media audio01: "src/main/resources/media/17 On the Beautiful Blue Danube, Op. 314.mp3", 100);
+
+Fin
